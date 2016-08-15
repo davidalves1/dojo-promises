@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs');
 
 function read() {
@@ -13,7 +15,7 @@ function read() {
 
 function getData(data) {
 	return new Promise((resolve, reject) => {
-		var arr = data.split("\n");
+		var arr = data.split(/\r?\n/);
 		
 		resolve({
 			title: arr.shift().split("|"),
@@ -27,16 +29,14 @@ function showData(data) {
 		var records = data.records;
 		var titles = data.title;
 
-		var res = records.map((elem, titles) => {
+		var res = records.map((elem) => {
 			var arr = elem.split("|");
-			var t0 = titles[0];
-			var t1 = titles[1];
-			var t2 = titles[2];
-			var response = {}
 
-			response.t0[0] = arr[0];
-			response.t1[1] = arr[1];
-			response.t2[2] = arr[2];
+			var response = {};
+
+			arr.map((value, key) => {
+				response[titles[key]] = value;
+			});
 
 			return response;
 		});
