@@ -48,5 +48,5 @@ function showData(data) {
 read()
 	.then(getData)
 	.then(showData)
-	.then((response) => console.log(response))
+	.then(response => console.log(response))
 	.catch(() => console.log('Erro.'));
